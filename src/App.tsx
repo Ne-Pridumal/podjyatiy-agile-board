@@ -1,19 +1,22 @@
-import * as React from 'react';
-import useStore from './hooks/useStore';
+import { observer } from 'mobx-react-lite';
+import React, { createContext, FC } from 'react';
+import Dashboard from './components/Dashboard';
+import Header from './components/Header';
 import RootStore from './store';
 
 const store = RootStore.create({})
 
-export const StoreContext = React.createContext(store);
+export const StoreContext = createContext(store);
 
-const App = () => {
-	const { users } = useStore()
-	console.log('users: ', users);
+const App: FC = () => {
 	return (
 		<StoreContext.Provider value={store} >
-			<div>app</div>
+			<Header />
+			<main className="">
+				<Dashboard />
+			</main>
 		</StoreContext.Provider>
 	)
-}
+} 
 
-export default App;
+export default observer(App); 
