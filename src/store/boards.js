@@ -8,6 +8,7 @@ const Task = types.model('Tasks', {
 	title: types.string,
 	description: types.maybe(types.string),
 	assignee: types.safeReference(User),
+  date: types.maybe(types.string),
 })
 
 const BoardSection = types.model('BoardSection', {
@@ -56,7 +57,12 @@ const Board = types.model('Board', {
 				id: uuidv4(),
 				...payload
 			})
-		}
+		},
+    removeTask(sectionId, taskId){
+      const section = self.sections.find(section => section.id === sectionId)
+      const taskRemoveIndex = section.tasks.findIndex(task => task.id === taskId)
+      section.tasks.splice(taskRemoveIndex, 1)
+    },
 	}
 })
 

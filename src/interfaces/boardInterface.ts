@@ -5,6 +5,7 @@ export interface TaskIterface {
 	title: string,
 	description: string,
 	assignee: UserInterface,
+  date: string | Date,
 }
 
 export interface SectionInterface {

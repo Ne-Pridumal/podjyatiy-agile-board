@@ -13,20 +13,21 @@ interface FormInterface {
 	title: string,
 	description: string,
 	assignee: string,
+  date: Date | null,
 }
 
 const NewTaskDialog: FC<NewTaskDialogProps> = ({ open, handleClose, activeSection }) => {
 	const { users, boards } = useStore()
 	const [formState, setFormState] = useState<FormInterface>()
-
-	const updateFormState = useCallback((event) => {
+	
+  const updateFormState = useCallback((event) => {
 		const { name, value } = event.target;
 		setFormState((prevFormState: any) => ({
 			...prevFormState,
 			[name]: value,
 		}));
 	}, [setFormState])
-
+  
 	const addNewTask = useCallback((event) => {
 		event.preventDefault()
 		boards.active.addTask(activeSection, formState)
@@ -83,6 +84,19 @@ const NewTaskDialog: FC<NewTaskDialogProps> = ({ open, handleClose, activeSectio
 							</Select>
 						</FormControl>
 					</Box>
+          <Box p={1}>
+            <FormControl fullWidth>
+              <FormLabel component='div'>
+                Date
+              </FormLabel>
+              <TextField
+                name='date'
+                value={formState?.date || ''}
+                onChange={updateFormState}
+                type='date'
+                />
+            </FormControl>
+          </Box>
 				</DialogContent>
 				<DialogContent>
 					<Button
@@ -104,15 +118,4 @@ const NewTaskDialog: FC<NewTaskDialogProps> = ({ open, handleClose, activeSectio
 }
 
 export default NewTaskDialog
-
-function Assignee<T>(name: void, arg1: string, title: any, arg3: string, description: any, arg5: string, Assignee: any, arg7: string): [any, any] {
-	throw new Error('Function not implemented.')
-}
-function description<T>(name: void, arg1: string, title: any, arg3: string, description: any, arg5: string, Assignee: <T>(name: void, arg1: string, title: any, arg3: string, description: any, arg5: string, Assignee: any, arg7: string) => [any, any], arg7: string): [any, any] {
-	throw new Error('Function not implemented.')
-}
-
-function title<T>(name: void, arg1: string, title: any, arg3: string, description: <T>(name: void, arg1: string, title: any, arg3: string, description: any, arg5: string, Assignee: <T>(name: void, arg1: string, title: any, arg3: string, description: any, arg5: string, Assignee: any, arg7: string) => [any, any], arg7: string) => [any, any], arg5: string, Assignee: <T>(name: void, arg1: string, title: any, arg3: string, description: any, arg5: string, Assignee: any, arg7: string) => [any, any], arg7: string): [any, any] {
-	throw new Error('Function not implemented.')
-}
 

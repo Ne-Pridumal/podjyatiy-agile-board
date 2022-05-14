@@ -30,7 +30,7 @@ const Column: FC<ColumnProps> = ({ section }) => {
 							{...provided.dragHandleProps}
 							style={getItemStyle(provided.draggableProps.style)}
 						>
-							<Task task={task} />
+							<Task task={task} sectionId={section.id} />
 						</Card>
 					)}
 				</Draggable>
